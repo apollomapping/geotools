@@ -16,16 +16,15 @@
  */
 package org.geotools.kml.bindings;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import javax.xml.namespace.QName;
 import org.geotools.kml.KML;
 import org.geotools.xml.AbstractComplexBinding;
 import org.geotools.xml.ElementInstance;
 import org.geotools.xml.Node;
 import org.locationtech.jts.geom.*;
-
-import javax.xml.namespace.QName;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Binding object for the type http://earth.google.com/kml/2.1:LinearRingType.
@@ -55,7 +54,8 @@ public class LinearRingTypeBinding extends AbstractComplexBinding {
     CoordinateSequenceFactory csFactory;
     GeometryFactory geometryFactory;
 
-    public LinearRingTypeBinding(GeometryFactory geometryFactory, CoordinateSequenceFactory csFactory) {
+    public LinearRingTypeBinding(
+            GeometryFactory geometryFactory, CoordinateSequenceFactory csFactory) {
         this.geometryFactory = geometryFactory;
         this.csFactory = csFactory;
     }
