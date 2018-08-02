@@ -16,14 +16,17 @@
  */
 package org.geotools.kml.bindings;
 
-import java.util.List;
-import java.util.Map;
+import org.geotools.factory.Hints;
+import org.geotools.feature.type.GeometryDescriptorImpl;
 import org.geotools.kml.v22.KML;
 import org.geotools.kml.v22.KMLTestSupport;
 import org.geotools.xml.Binding;
 import org.locationtech.jts.geom.Point;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
+
+import java.util.List;
+import java.util.Map;
 
 /** @source $URL$ */
 public class PlacemarkTypeBindingTest extends KMLTestSupport {
@@ -205,5 +208,25 @@ public class PlacemarkTypeBindingTest extends KMLTestSupport {
         @SuppressWarnings("unchecked")
         Map<String, String> untypedData = (Map<String, String>) userData.get("UntypedExtendedData");
         assertEquals("bar", untypedData.get("foo"));
+    }
+
+    public void testParsePlacemarkWith3DGeometry() throws Exception {
+        String xml =
+                "<Placemark>"
+                        + "<name>name</name>"
+                        + "<description>description</description>"
+                        + "<Point>"
+                        + "<coordinates>1,2,3</coordinates>"
+                        + "</Point>"
+                        + "</Placemark>";
+        buildDocument(xml);
+
+        SimpleFeature placemark = parsePlacemark();
+
+        SimpleFeatureType featureType = placemark.getFeatureType();
+        GeometryDescriptorImpl geomType =
+                (GeometryDescriptorImpl) featureType.getDescriptor("Geometry");
+        int dimensionData = (int) geomType.getUserData().get(Hints.COORDINATE_DIMENSION);
+        assertEquals(dimensionData, 3);
     }
 }

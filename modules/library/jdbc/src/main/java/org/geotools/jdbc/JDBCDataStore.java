@@ -4333,8 +4333,7 @@ public final class JDBCDataStore extends ContentDataStore implements GmlObjectSt
     protected int getDescriptorDimension(AttributeDescriptor descriptor) {
         int dimension = -1;
 
-        // check if we have stored the native srid in the descriptor (we should)
-        if (descriptor.getUserData().get(JDBCDataStore.JDBC_NATIVE_SRID) != null) {
+        if (descriptor.getUserData().get(Hints.COORDINATE_DIMENSION) != null) {
             dimension = (Integer) descriptor.getUserData().get(Hints.COORDINATE_DIMENSION);
         }
 
