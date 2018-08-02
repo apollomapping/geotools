@@ -16,9 +16,6 @@
  */
 package org.geotools.kml.bindings;
 
-import java.util.Arrays;
-import java.util.List;
-import javax.xml.namespace.QName;
 import org.geotools.factory.Hints;
 import org.geotools.feature.simple.SimpleFeatureBuilder;
 import org.geotools.feature.simple.SimpleFeatureTypeBuilder;
@@ -31,6 +28,10 @@ import org.locationtech.jts.geom.Geometry;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.AttributeDescriptor;
+
+import javax.xml.namespace.QName;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Binding object for the type http://earth.google.com/kml/2.1:PlacemarkType.
@@ -115,7 +116,7 @@ public class PlacemarkTypeBinding extends AbstractComplexBinding {
                 Geometry geom = (Geometry) childNode.getValue();
 
                 // figure out if were a 3d geometry and set the attribute dimension type
-                if (geom.getCoordinates().length > 0 && !Double.isNaN(geom.getCoordinates()[0].z)) {
+                if (geom.getCoordinate() != null && !Double.isNaN(geom.getCoordinate().z)) {
                     AttributeDescriptor geomType = placemarkFeatureType.getDescriptor("Geometry");
                     geomType.getUserData().put(Hints.COORDINATE_DIMENSION, 3);
                 }

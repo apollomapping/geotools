@@ -16,6 +16,8 @@
  */
 package org.geotools.kml.bindings;
 
+import java.util.List;
+import java.util.Map;
 import org.geotools.factory.Hints;
 import org.geotools.feature.type.GeometryDescriptorImpl;
 import org.geotools.kml.v22.KML;
@@ -24,9 +26,6 @@ import org.geotools.xml.Binding;
 import org.locationtech.jts.geom.Point;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
-
-import java.util.List;
-import java.util.Map;
 
 /** @source $URL$ */
 public class PlacemarkTypeBindingTest extends KMLTestSupport {
